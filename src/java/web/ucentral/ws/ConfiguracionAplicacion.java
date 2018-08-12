@@ -24,9 +24,10 @@ public class ConfiguracionAplicacion  extends Application {
     
     private void addResourceClasses(Set<Class<?>> resources) {
         //Incluir clases de los servicios
-        resources.add(ServicioPruebas.class);
         resources.add(Productos.class);
         resources.add(Saloneros.class);
+        resources.add(Orden.class);
+        resources.add(DetalleOrden.class);
     }
     
 }

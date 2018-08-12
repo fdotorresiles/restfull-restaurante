@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  * @author luisfernandotorressiles
  */
 @Path("saloneros")
-public class Saloneros {
+public class Saloneros extends CrossOrigin {
     
     @GET
     @Path("")

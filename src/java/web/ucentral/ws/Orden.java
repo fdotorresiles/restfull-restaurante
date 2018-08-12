@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  * @author luisfernandotorressiles
  */
 @Path("ordenes")
-public class Orden {
+public class Orden extends CrossOrigin {
     
     @GET
     @Path("")
@@ -26,7 +26,5 @@ public class Orden {
         com.ucentral.dao.Ordenes oOrdenes = new com.ucentral.dao.Ordenes();
         
         return oOrdenes.consultarMaestroOrdenes();
-    }
-    
-    
+    }     
 }

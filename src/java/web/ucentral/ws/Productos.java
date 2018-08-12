@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  * @author luisfernandotorressiles
  */
 @Path("productos")
-public class Productos {
+public class Productos extends CrossOrigin {
     
     @GET
     @Path("")
@@ -25,7 +25,9 @@ public class Productos {
     public List<com.ucentral.modelo.Productos> obtenerProductos() throws Exception {
         com.ucentral.dao.Productos oProductos = new com.ucentral.dao.Productos();
         
-        return oProductos.consultarProductos();
+        List<com.ucentral.modelo.Productos> productos = oProductos.consultarProductos();
+        
+        return productos;
     }
     
 }

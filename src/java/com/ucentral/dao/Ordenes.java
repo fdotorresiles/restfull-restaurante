@@ -6,17 +6,12 @@
 package com.ucentral.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 
 
@@ -69,7 +64,62 @@ public class Ordenes {
         }
     }
     
-        public boolean createSalonero(com.ucentral.modelo.Saloneros eSalonero) {
+      public List<com.ucentral.modelo.DetalleOrden> consultarDetalleOrdenes(int idOrden) throws Exception {
+        com.ucentral.dao.Conexion oConexion = new com.ucentral.dao.Conexion();
+        
+        Connection conn = null;
+        
+        String sqlCosulta = "SELECT d.idDetalleOrden, "
+                + "d.idOrden, "
+                + "d.idProducto, "
+                + "d.cantidad, "
+                + "d.precioRegistrado "
+                + "FROM detalleOrden d "
+                + "WHERE d.idOrden = ?";
+        
+        com.ucentral.modelo.DetalleOrden oOrden;
+        List<com.ucentral.modelo.DetalleOrden> oLista = new ArrayList<>();
+        
+        try
+        {
+         conn = oConexion.conectarse();         
+         PreparedStatement  objStatment = conn.prepareStatement(sqlCosulta);
+         objStatment.setString(1, String.valueOf(idOrden));
+         
+         ResultSet objResultado = objStatment.executeQuery();
+         
+         while(objResultado.next())
+         {
+             oOrden = new com.ucentral.modelo.DetalleOrden();
+             oOrden.setIdDetalleOrden(objResultado.getInt("idDetalleOrden"));
+             oOrden.setIdOrden(objResultado.getInt("IdOrden"));
+             oOrden.setIdProducto(objResultado.getInt("idProducto"));
+             oOrden.setCantidad(objResultado.getInt("cantidad"));
+             oOrden.setPrecioRegistrado(objResultado.getDouble("precioRegistrado"));
+             oLista.add(oOrden);
+         }
+         return oLista;
+        }
+        catch(SQLException e)
+        {
+            throw new Exception("Ocurrió el siguiente error general: " + e.getMessage());
+        }
+        finally
+        {
+            try
+            {
+                if(conn != null)
+                    oConexion.desconectarse(conn);
+            }
+            catch(SQLException ex)
+            {
+                throw new Exception ("Ocurrió el siguiente error en BD: " + ex.getMessage());
+            }
+        }
+    }
+      
+      
+          public boolean createSalonero(com.ucentral.modelo.Saloneros eSalonero) {
         
         try {
             
@@ -90,7 +140,32 @@ public class Ordenes {
             return true;
         } catch (Exception e) {
                 return false;
-        }
+        }        
+    }
+    
+    
+    
+    public boolean createDetalle(com.ucentral.modelo.DetalleOrden detalleOrden) {        
+        try {            
+            com.ucentral.dao.Conexion oConexion = new com.ucentral.dao.Conexion();
         
+            String sql = "INSERT INTO detalleOrden\n" +
+            "( idOrden, idProducto, cantidad, precioRegistrado) VALUES ( ?, ?, ?, ? );";
+            Connection conn = null;
+
+            conn = oConexion.conectarse();
+
+            PreparedStatement pstmnt = conn.prepareStatement(sql);
+            
+            pstmnt.setInt(1, detalleOrden.getIdOrden());
+            pstmnt.setInt(2, detalleOrden.getIdProducto());
+            pstmnt.setInt(3, detalleOrden.getCantidad());
+            pstmnt.setDouble(4, detalleOrden.getPrecioRegistrado());
+        
+            pstmnt.executeUpdate();
+            return true;
+        } catch (Exception e) {
+                return false;
+        }        
     }
 }

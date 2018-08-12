@@ -18,7 +18,7 @@ public class Conexion {
     
     String DRIVERSQLITE = "org.sqlite.JDBC";
     String DRIVESQLSERVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    String STRINGCONEXIONSQLITE = "jdbc:sqlite:/Users/luisfernandotorressiles/Documents/Personal/Freelance/Marco/restauranteBD.db";
+    String STRINGCONEXIONSQLITE = "jdbc:sqlite:\\D:\\WorkSpace Git\\restfull-restaurante\\restauranteBD.db";
     
     private boolean _tipoConexion = false;
     
