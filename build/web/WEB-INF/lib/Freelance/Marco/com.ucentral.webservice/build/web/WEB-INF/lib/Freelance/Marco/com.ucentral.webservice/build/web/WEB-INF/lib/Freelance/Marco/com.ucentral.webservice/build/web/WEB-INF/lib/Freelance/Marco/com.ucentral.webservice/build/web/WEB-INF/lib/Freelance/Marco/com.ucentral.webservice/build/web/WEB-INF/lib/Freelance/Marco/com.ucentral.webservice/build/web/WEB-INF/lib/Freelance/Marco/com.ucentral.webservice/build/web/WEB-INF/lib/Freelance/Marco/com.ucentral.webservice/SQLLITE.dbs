@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Sqlite" id="Project_2dca7dc" template="Default" database="Sqlite" >
+	<schema name="Default" schemaname="Default" >
+		<table name="detalleOrden" generator_rows="45" >
+			<column name="idDetalleOrden" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="idOrden" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="idProducto" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="cantidad" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" regexp="[0-9]{1}" />
+			<column name="precioRegistrado" type="real" jt="8" mandatory="y" regexp="1200|1400|1500|1600|1800|2000|2100|2500|2800|3000" />
+			<index name="pk_detalleOrden" unique="PRIMARY_KEY" >
+				<column name="idDetalleOrden" />
+			</index>
+			<fk name="Fk_detalleOrden" virtual="y" to_schema="Default" to_table="maestroOrden" >
+				<fk_column name="idOrden" pk="idOrden" />
+			</fk>
+			<fk name="Fk_detalleOrden_0" virtual="y" to_schema="Default" to_table="producto" >
+				<fk_column name="idProducto" pk="idProducto" />
+			</fk>
+		</table>
+		<table name="maestroOrden" generator_rows="15" >
+			<column name="idOrden" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="idSalonero" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="cliente" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" regexp="($First Name) ($Last Name)" />
+			<index name="pk_maestroOrden" unique="PRIMARY_KEY" >
+				<column name="idOrden" />
+			</index>
+			<fk name="Fk_maestroOrden" virtual="y" to_schema="Default" to_table="saloneros" >
+				<fk_column name="idSalonero" pk="idSalonero" />
+			</fk>
+		</table>
+		<table name="producto" >
+			<column name="idProducto" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="descripcion" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="tipoProducto" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="precio" type="real" jt="8" mandatory="y" />
+			<index name="pk_producto" unique="PRIMARY_KEY" >
+				<column name="idProducto" />
+			</index>
+		</table>
+		<table name="saloneros" >
+			<column name="idSalonero" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="Nombre" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="Apellidos" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<index name="pk_saloneros" unique="PRIMARY_KEY" >
+				<column name="idSalonero" />
+			</index>
+		</table>
+		<table name="sqlite_sequence" >
+			<column name="name" type="set" length="2000000000" decimal="10" jt="12" />
+			<column name="seq" type="set" length="2000000000" decimal="10" jt="12" />
+		</table>
+	</schema>
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.18.0.jar" driver_desc="Standard" host="localhost" port="7210" instance="D:/WorkSpace Git/restfull-restaurante/restauranteBD.db" />
+	<layout name="Default Layout" id="Layout_46b6d7e" show_relation="columns" >
+		<entity schema="Default" name="sqlite_sequence" color="bfd4f5" x="45" y="225" />
+		<entity schema="Default" name="saloneros" color="bfd4f5" x="210" y="225" />
+		<entity schema="Default" name="maestroOrden" color="bfd4f5" x="405" y="45" />
+		<entity schema="Default" name="producto" color="bfd4f5" x="405" y="225" />
+		<entity schema="Default" name="detalleOrden" color="bfd4f5" x="210" y="45" />
+		<script name="detalleOrden_001" id="Editor_4552878" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	detalleOrden n;]]></string>
+		</script>
+		<query id="Query_632a3e" name="detalleOrden" >
+			<query_table schema="Default" name="detalleOrden" alias="d" x="45" y="45" >
+				<column name="idDetalleOrden" />
+				<column name="idOrden" />
+				<column name="idProducto" />
+				<column name="cantidad" />
+				<column name="precioRegistrado" />
+			</query_table>
+		</query>
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_2332f10" show_column_type="y" show_relation="columns" >
+		<entity schema="Default" name="detalleOrden" color="bfd4f5" x="210" y="150" />
+		<entity schema="Default" name="maestroOrden" color="bfd4f5" x="420" y="150" />
+		<entity schema="Default" name="producto" color="bfd4f5" x="420" y="330" />
+		<entity schema="Default" name="saloneros" color="bfd4f5" x="210" y="330" />
+		<entity schema="Default" name="sqlite_sequence" color="bfd4f5" x="45" y="330" />
+		<callout x="210" y="75" pointer="NO" >
+			<comment><![CDATA[Double-click any table, column or foreign key to edit, right-click to start one of the tools below.
+Use the Relational Data Browse for simultaneously exploring data from multiple tables.
+All tools will be saved to project file and can be reopen.]]></comment>
+		</callout>
+		<group name="detalleOrden" color="ecf0f7" >
+			<entity schema="Default" name="detalleOrden" />
+			<entity schema="Default" name="maestroOrden" />
+			<entity schema="Default" name="producto" />
+			<entity schema="Default" name="saloneros" />
+			<entity schema="Default" name="sqlite_sequence" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_5885931" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	detalleOrden n;]]></string>
+		</script>
+		<browser id="Browse_286459" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="Default" entity="detalleOrden" x="20" y="20" width="400" height="300" />
+		</browser>
+		<query id="Query_4106f89" name="Sample Query Builder" >
+			<query_table schema="Default" name="detalleOrden" alias="d" x="45" y="45" >
+				<column name="idDetalleOrden" />
+				<column name="idOrden" />
+				<column name="idProducto" />
+				<column name="cantidad" />
+				<column name="precioRegistrado" />
+			</query_table>
+		</query>
+	</layout>
+</project>
