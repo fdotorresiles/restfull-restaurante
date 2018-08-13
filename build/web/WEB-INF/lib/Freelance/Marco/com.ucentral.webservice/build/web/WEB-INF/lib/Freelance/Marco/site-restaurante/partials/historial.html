@@ -1,0 +1,35 @@
+<row>
+    <div class="col-md-8">
+        <row>
+            <h3>Ordenes</h3>
+            <p>Seleccione la orden para ver su detalle</p>
+            <table class="table">
+                <tr ng-repeat="orden in _ordenes">
+                    <td>Orden Id: {{orden.idOrden}}</td>
+                    <td>Cliente: {{orden.cliente}}</td>
+
+                    <td>
+                        <a class="btn btn-primary btn-right" ng-click="mostrarOrden(orden.idOrden, orden.cliente)">Mostrar detalle</a>
+                    </td>
+                </tr>
+            </table>
+        </row>
+    </div>
+    <div class="col-md-4">
+        <h4>Detalle de orden actual</h4>
+        Cliente: {{clienteNombre}}
+        <br>
+        <row ng-if="_detalleOrden">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr ng-repeat="detalle in _detalleOrden">
+                        <td>{{detalle.descripcion}}</td>
+                        <td>{{detalle.precioRegistrado}}</td>
+                        <td>{{detalle.cantidad}}</td>
+                    </tr>
+                </table>
+            </div>
+            Total Pagado: {{totalPagar}}
+        </row>
+    </div>
+</row>

@@ -1,0 +1,16 @@
+<row>
+    <h3>Salonerlos</h3>
+    <p>Seleccione su perfil para iniciar a tomar la orden</p>
+    <table class="table">
+        <tr ng-repeat="salonero in _saloneros">
+            <td>{{salonero.nombre}} {{salonero.apellidos}}</td>
+            <td>
+                <a class="btn btn-primary btn-right" ng-click="seleccionarSalonero(salonero.idSalonero)">Seleccionar</a>
+            </td>
+        </tr>
+    </table>
+</row>
+
+
+<button ng-if="_idSalonero" class="btn btn-primary" ui-sref="orden({idSalonero: _idSalonero})">
+    Tomar Orden</button>

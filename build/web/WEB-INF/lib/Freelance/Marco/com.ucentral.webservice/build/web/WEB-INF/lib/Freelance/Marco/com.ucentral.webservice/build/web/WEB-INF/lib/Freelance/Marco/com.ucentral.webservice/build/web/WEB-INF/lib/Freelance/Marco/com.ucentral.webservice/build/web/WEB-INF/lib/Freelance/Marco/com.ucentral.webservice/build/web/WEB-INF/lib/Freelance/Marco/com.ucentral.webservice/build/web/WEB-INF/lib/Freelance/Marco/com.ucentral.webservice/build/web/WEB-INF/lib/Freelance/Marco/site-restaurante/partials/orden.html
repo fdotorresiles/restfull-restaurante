@@ -1,0 +1,86 @@
+<row>
+    <div class="col-md-8">
+        <h3>Menú</h3>
+        <br>
+        <row>
+            <div class="col-md-6">
+                <h4>Platos Fuertes</h4>
+                <table class="table">
+                    <tr ng-repeat="platoFuerte in _platosFuertes">
+                        <td>{{platoFuerte.descripcion}}
+                            <br>₡ {{platoFuerte.precio}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-right" ng-click="agregarOrden(platoFuerte)">+</a>
+                            <!-- <a class="btn btn-danger btn-right" ng-click="disminuirOrden(platoFuerte)">-</a> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>Bebidas</h4>
+                <table class="table">
+                    <tr ng-repeat="bebida in _bebidas">
+                        <td>{{bebida.descripcion}}
+                            <br>₡ {{bebida.precio}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-right" ng-click="agregarOrden(bebida)">+</a>
+                            <!-- <a class="btn btn-danger btn-right" ng-click="disminuirOrden(bebida)">-</a> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>Postres</h4>
+                <table class="table">
+                    <tr ng-repeat="postre in _postres">
+                        <td>{{postre.descripcion}}
+                            <br>₡ {{postre.precio}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-right" ng-click="agregarOrden(postre)">+</a>
+                            <!-- <a class="btn btn-danger btn-right" ng-click="disminuirOrden(postre)">-</a> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>Combos</h4>
+                <table class="table">
+                    <tr ng-repeat="combo in _combos">
+                        <td>{{combo.descripcion}}
+                            <br>₡ {{combo.precio}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-right" ng-click="agregarOrden(combo)">+</a>
+                            <!-- <a class="btn btn-danger btn-right" ng-click="disminuirOrden(combo)">-</a> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </row>
+    </div>
+    <div class="col-md-4">
+        <h4>Orden actual</h4>
+        <row ng-if="_detalleOrden">
+            <input type="text" class="form-control" placeholder="Nombre de cliente" id="customerId">
+            <br>
+            <div class="col-md-12">
+                <table class="table">
+                    <tr ng-repeat="detalle in _detalleOrden">
+                        <td>{{detalle.descripcion}}</td>
+                        <td>{{detalle.precio}}</td>
+                        <td>{{detalle.cantidad}}</td>
+                        <td>
+                            <!-- <a class="btn btn-primary btn-right" ng-click="agregarOrden(combo)">+</a> -->
+                            <a class="btn btn-danger btn-right" ng-click="disminuirOrden(detalle)">-</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            Total: {{totalPagar}}
+            <div class="col-md-10 col-xs-offset-1">
+                <hr>
+                <button class="btn btn-primary" ng-click="guardarOrden()">Terminar Orden</button>
+                <br>
+            </div>
+        </row>
+    </div>
+</row>
